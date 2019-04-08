@@ -11,15 +11,16 @@ import routes from "./routes"
 
 const app = express()
 
-app.use(cookieParse());
-app.use(bodyParse.json());
+app.set("view engine", "pug");
+app.use(cookieParse());                                 // cookie관련 middleware 쿠키 사용을 도와줌 
+app.use(bodyParse.json());                              // req, res 정보들을 검사 하는 middleware
 app.use(bodyParse.urlencoded({ extended: true }));
-app.use(helmet());      // 보안   middleware
-app.use(morgan("dev")); // logger middleware
+app.use(helmet());                                      // 보안   middleware
+app.use(morgan("dev"));                                 // logger middleware
 
 app.use(routes.home, globalRouter);
-app.use(routes.users, userRouter); //라우터 등록
-app.use(routes.videos, videoRouter); //라우터 사용 
+app.use(routes.users, userRouter);                      // 라우터 등록
+app.use(routes.videos, videoRouter);                    // 라우터 사용 
 
 export default app;
 
