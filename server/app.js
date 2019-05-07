@@ -8,6 +8,7 @@ import userRouter from "./router/userRouter"
 import videoRouter from "./router/videoRouter"
 import globalRouter from "./router/globalRouter"
 import routes from "./routes"
+import { localsMiddleware } from "./middlewares";
 
 const app = express()
 
@@ -17,6 +18,8 @@ app.use(bodyParse.json());                              // req, res 정보들을
 app.use(bodyParse.urlencoded({ extended: true }));
 app.use(helmet());                                      // 보안   middleware
 app.use(morgan("dev"));                                 // logger middleware
+app.use(localsMiddleware)
+
 
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);                      // 라우터 등록
