@@ -55,7 +55,7 @@ const routes = {
     },
     deleteVideo: (id) => {
         if (id) {
-            return `/videos/${id}/delete`;
+            return `/videos/${id}/edit`;
         } else {
             return DELETE_VIDEO;
         }
