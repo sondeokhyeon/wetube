@@ -1,4 +1,5 @@
 import routes from "../routes";
+import User from "../models/User";
 
 export const getJoin = (req, res) => {
   res.render("join", {
@@ -6,7 +7,7 @@ export const getJoin = (req, res) => {
   });
 };
 
-export const postJoin = (req, res) => {
+export const postJoin = async (req, res) => {
   const {
     body: { name, email, password, password2 }
   } = req;
@@ -16,6 +17,7 @@ export const postJoin = (req, res) => {
       pageTitle: "Join"
     });
   } else {
+    const user = await User.create()
     // To do : registerUser
     // To do : Log user in
     res.redirect(routes.home);
