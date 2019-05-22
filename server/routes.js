@@ -11,6 +11,7 @@ const USERS = "/users";
 const USERS_DETAIL = "/:id";
 const EDIT_PROFILE = "/edit-profile";
 const CHAGNE_PASSWORD = "/change-password";
+const ME = "/me";
 
 // video
 
@@ -19,6 +20,11 @@ const UPLOAD = "/upload";
 const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
+
+//Github
+
+const GITHUB = "/auth/github";
+const GITGUB_CALLBACK = "/auth/github/callback";
 
 const routes = {
   home: HOME,
@@ -54,7 +60,10 @@ const routes = {
       return `/videos/${id}/edit`;
     }
     return DELETE_VIDEO;
-  }
+  },
+  github: GITHUB,
+  githubCallback: GITGUB_CALLBACK,
+  me: ME
 };
 
 export default routes;

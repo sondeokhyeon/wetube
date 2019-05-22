@@ -26,7 +26,7 @@ export const postJoin = async (req, res, next) => {
       await User.register(user, password);
       next();
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res.redirect(routes.home);
     }
   }
@@ -38,14 +38,48 @@ export const getLogin = (req, res) => {
   });
 };
 
+export const githubLogin = passport.authenticate("github");
+
 export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
   successRedirect: routes.home
 });
 
-export const logout = (req, res) => {
-  // To do : precess home
+export const githubLoginCallback = async (_, __, profile, cb) => {
+  const {
+    _json: { id, avatar_url: avatarUrl, name, email }
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.gitgubId = id;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      gitgubId: id,
+      avatarUrl
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    console.log(error);
+    return cb(error);
+  }
+};
+
+export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
+};
+
+export const logout = (req, res) => {
+  req.logout();
+  res.redirect(routes.home);
+};
+
+export const getMe = (req, res) => {
+  res.render("userDetail", { pageTitle: "userDetail", user: req.user });
 };
 
 export const users = (req, res) =>
@@ -53,10 +87,9 @@ export const users = (req, res) =>
     pageTitle: "users"
   });
 
-export const userDetail = (req, res) =>
-  res.render("userDetail", {
-    pageTitle: "userDetail"
-  });
+export const userDetail = (req, res) => {
+  res.render("userDetail", { pageTitle: "userDetail" });
+};
 
 export const editProfile = (req, res) =>
   res.render("editProfile", {
