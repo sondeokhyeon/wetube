@@ -37,7 +37,7 @@
     "webpack": "^4.31.0"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' --ignore 'static';",
+    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' --ignore 'static'; ",
     "dev:asserts": "cross-env WEBPACK_NEV=development webpack -w",
     "build:asserts": "WEBPACK_ENV=production webpack",
     "tunnel": "lt --port 4000"
