@@ -8,10 +8,11 @@ import passport from "passport";
 import mongoose from "mongoose";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import routes from "./routes";
 import userRouter from "./router/userRouter";
 import videoRouter from "./router/videoRouter";
 import globalRouter from "./router/globalRouter";
-import routes from "./routes";
+import apiRouter from "./router/apiRouter";
 
 import { localsMiddleware } from "./middlewares";
 import "./passport";
@@ -47,6 +48,7 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter); // 라우터 등록
 app.use(routes.videos, videoRouter); // 라우터 사용
+app.use(routes.api, apiRouter);
 
 export default app;
 
