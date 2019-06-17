@@ -31,7 +31,7 @@ const FB_CALLBACK = "/auth/facebook/callback";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 
-const ADD_COMMNET= "/:id/comment";
+const ADD_COMMNET = "/:id/comment";
 
 const routes = {
   home: HOME,
@@ -64,7 +64,7 @@ const routes = {
   },
   deleteVideo: id => {
     if (id) {
-      return `/videos/${id}/edit`;
+      return `/videos/${id}/delete`;
     }
     return DELETE_VIDEO;
   },

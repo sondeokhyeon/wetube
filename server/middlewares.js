@@ -23,6 +23,7 @@ export const onlyPublic = (req, res, next) => {
 };
 
 export const onlyPrivate = (req, res, next) => {
+  console.log("여기서 걸리는것인가? 그것이 알고 싶다.");
   if (req.user) {
     next();
   } else {

@@ -6,6 +6,7 @@ let streamObject;
 let videoRecorder;
 
 const handleVideoData = event => {
+  videoPreview.pause();
   const { data: videoFile } = event;
   const link = document.createElement("a");
   link.href = URL.createObjectURL(videoFile);
@@ -36,7 +37,7 @@ const getVideo = async () => {
     });
     videoPreview.srcObject = stream;
     videoPreview.muted = true;
-    videoPreview.onplay();
+    videoPreview.play();
     recordBtn.innerHTML = "Stop Record";
     streamObject = stream;
     startRecoding();
